@@ -1,51 +1,49 @@
 package com.oddzmint.newsoutletapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.oddzmint.newsoutletapp.data.AppEntryRepositoryImpl
-import com.oddzmint.newsoutletapp.data.local.dataStore
-import com.oddzmint.newsoutletapp.domain.AppEntryRepository
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.lifecycleScope
+import com.oddzmint.newsoutletapp.domain.useCase.AppEntryUseCases
+import com.oddzmint.newsoutletapp.presentation.OnBoardingViewModel
 import com.oddzmint.newsoutletapp.presentation.onboarding.OnBoardingScreen
 import com.oddzmint.newsoutletapp.ui.theme.NewsOutletAppTheme
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+@Inject
+lateinit var useCase: AppEntryUseCases
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
-
-        val repository: AppEntryRepository = AppEntryRepositoryImpl(dataStore = dataStore)
+        lifecycleScope.launch {
+            useCase.readAppEntry().collect {
+                Log.d("test",it.toString())
+            }
+        }
 
         setContent {
             NewsOutletAppTheme {
                 Box(modifier = Modifier.background(color = MaterialTheme.colorScheme.background)) {
-                    OnBoardingScreen()
+                    val viewModel: OnBoardingViewModel = hiltViewModel()
+                    OnBoardingScreen(
+                        event = {
+                            viewModel.onEvent(it)
+                        }
+                    )
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    NewsOutletAppTheme {
-        Greeting("Android")
     }
 }

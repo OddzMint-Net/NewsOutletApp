@@ -31,7 +31,8 @@ import kotlinx.coroutines.launch
 @SuppressLint("RememberReturnType")
 @Composable
 fun OnBoardingScreen(
-    initialPage: Int = 0
+    initialPage: Int = 0,
+    event: (OnBoardingEvent) -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxWidth()
@@ -90,8 +91,8 @@ fun OnBoardingScreen(
                         text = buttonState.value[1],
                         onClick = {
                             scope.launch {
-                                if (pagerState.currentPage == 3) {
-                                    //TODO: Navigate to Home Screen
+                                if (pagerState.currentPage == 2) {
+                                    event(OnBoardingEvent.SaveAppEntry)
                                 } else {
                                     pagerState.animateScrollToPage(
                                         page = pagerState.currentPage + 1
@@ -110,7 +111,9 @@ fun OnBoardingScreen(
 @Composable
 fun OnBoardingPreviewFirst() {
     NewsOutletAppTheme {
-        OnBoardingScreen(initialPage = 0)
+        OnBoardingScreen(
+            initialPage = 0,
+            event = {})
     }
 }
 
@@ -118,7 +121,10 @@ fun OnBoardingPreviewFirst() {
 @Composable
 fun OnBoardingPreviewMiddle() {
     NewsOutletAppTheme {
-        OnBoardingScreen(initialPage = 1)
+        OnBoardingScreen(
+            initialPage = 1,
+            event = {}
+        )
     }
 }
 
@@ -126,6 +132,9 @@ fun OnBoardingPreviewMiddle() {
 @Composable
 fun OnBoardingPreviewLast() {
     NewsOutletAppTheme {
-        OnBoardingScreen(initialPage = 2)
+        OnBoardingScreen(
+            initialPage = 2,
+            event = {}
+        )
     }
 }

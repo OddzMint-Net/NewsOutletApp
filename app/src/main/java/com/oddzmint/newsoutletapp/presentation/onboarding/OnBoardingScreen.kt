@@ -45,7 +45,7 @@ fun OnBoardingScreen(
                 when (pagerState.currentPage) {
                     0 -> listOf("", "Next")
                     1 -> listOf("Back", "Next")
-                    2 -> listOf("Back", "")
+                    2 -> listOf("Back", "Get Started")
                     else -> listOf("", "")
                 }
             }
@@ -76,7 +76,7 @@ fun OnBoardingScreen(
             ) {
                 val scope = rememberCoroutineScope()
                 if (buttonState.value[0].isNotEmpty()) {
-                    NewsButton(
+                    NewsTextButton(
                         text = buttonState.value[0],
                         onClick = {
                             scope.launch {

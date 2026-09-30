@@ -3,14 +3,11 @@ package com.oddzmint.newsoutletapp.presentation.navGraph
 import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavDestination
-import androidx.navigation.NavGraph
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.oddzmint.newsoutletapp.presentation.OnBoardingViewModel
-import com.oddzmint.newsoutletapp.presentation.OnBoardingViewModel_HiltModules
 import com.oddzmint.newsoutletapp.presentation.onboarding.OnBoardingEvent
 import com.oddzmint.newsoutletapp.presentation.onboarding.OnBoardingScreen
 

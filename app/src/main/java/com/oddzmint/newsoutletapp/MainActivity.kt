@@ -3,6 +3,7 @@ package com.oddzmint.newsoutletapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -23,9 +24,11 @@ class MainActivity : ComponentActivity() {
         installSplashScreen().apply {
             setKeepOnScreenCondition { viewModel.splashCondition }
         }
+        enableEdgeToEdge()
 
         setContent {
             NewsOutletAppTheme {
+
                 Box(modifier = Modifier.background(color = MaterialTheme.colorScheme.background)) {
                     if (!viewModel.splashCondition) {
                         NavGraph(startDestination = viewModel.startDestination)

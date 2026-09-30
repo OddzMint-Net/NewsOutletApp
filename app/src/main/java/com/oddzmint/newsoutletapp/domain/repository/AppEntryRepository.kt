@@ -1,4 +1,4 @@
-package com.oddzmint.newsoutletapp.domain
+package com.oddzmint.newsoutletapp.domain.repository
 
 import kotlinx.coroutines.flow.Flow
 

@@ -1,6 +1,6 @@
 package com.oddzmint.newsoutletapp.domain.useCase
 
-import com.oddzmint.newsoutletapp.domain.AppEntryRepository
+import com.oddzmint.newsoutletapp.domain.repository.AppEntryRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

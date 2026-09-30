@@ -1,8 +1,14 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.plugin.compose")
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
+}
+val localProps = Properties().apply {
+    val file = rootProject.file("local.properties")
+    if (file.exists()) load(file.inputStream())
 }
 
 android {
@@ -14,6 +20,12 @@ android {
     }
 
     defaultConfig {
+        buildConfigField(
+            "String",
+            "NEWS_API_KEY",
+            "\"${localProps.getProperty("NEWS_API_KEY", "")}\""
+        )
+
         applicationId = "com.oddzmint.newsoutletapp"
         minSdk = 24
         targetSdk = 36
@@ -35,6 +47,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -61,6 +74,11 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
     ksp("com.google.dagger:hilt-android-compiler:2.59.2") // or ksp(...)
     implementation("androidx.navigation:navigation-compose:2.8.5")
+
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
 
 }

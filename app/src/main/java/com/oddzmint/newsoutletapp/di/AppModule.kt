@@ -5,7 +5,10 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.oddzmint.newsoutletapp.data.AppEntryRepositoryImpl
-import com.oddzmint.newsoutletapp.domain.AppEntryRepository
+import com.oddzmint.newsoutletapp.data.NewsRepositoryImpl
+import com.oddzmint.newsoutletapp.data.remote.NewsApi
+import com.oddzmint.newsoutletapp.domain.repository.AppEntryRepository
+import com.oddzmint.newsoutletapp.domain.repository.NewsRepository
 import com.oddzmint.newsoutletapp.domain.useCase.AppEntryUseCases
 import com.oddzmint.newsoutletapp.domain.useCase.ReadAppEntry
 import com.oddzmint.newsoutletapp.domain.useCase.SaveAppEntry
@@ -45,5 +48,11 @@ object AppModule {
             saveAppEntry = SaveAppEntry(repository),
             readAppEntry = ReadAppEntry(repository)
         )
+    }
+
+    @Provides
+    @Singleton
+    fun provideNewsRepository(api: NewsApi): NewsRepository {
+        return NewsRepositoryImpl(api)
     }
 }

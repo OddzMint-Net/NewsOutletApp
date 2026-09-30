@@ -1,6 +1,6 @@
 package com.oddzmint.newsoutletapp.domain.useCase
 
-import com.oddzmint.newsoutletapp.domain.AppEntryRepository
+import com.oddzmint.newsoutletapp.domain.repository.AppEntryRepository
 import javax.inject.Inject
 
 class SaveAppEntry @Inject constructor(private val repository: AppEntryRepository) {

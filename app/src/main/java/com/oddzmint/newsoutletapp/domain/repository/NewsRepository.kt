@@ -1,7 +1,9 @@
 package com.oddzmint.newsoutletapp.domain.repository
 
-import com.oddzmint.newsoutletapp.domain.model.NewsPage
+import androidx.paging.PagingData
+import com.oddzmint.newsoutletapp.domain.model.Article
+import kotlinx.coroutines.flow.Flow
 
 interface NewsRepository {
-    suspend fun getLatestNews(page: String?): NewsPage
+    fun getLatestNews(): Flow<PagingData<Article>>
 }

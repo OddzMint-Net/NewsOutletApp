@@ -1,66 +1,68 @@
 package com.oddzmint.newsoutletapp.presentation.navGraph
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.LoadState
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.oddzmint.newsoutletapp.presentation.NewsViewModel
-import com.oddzmint.newsoutletapp.presentation.news.NewsState
+import com.oddzmint.newsoutletapp.presentation.onboarding.components.NewsArticleItem
 
 @Composable
 fun NewsNavigatorScreen(
-    viewModel: NewsViewModel = hiltViewModel()
+    viewModel: NewsViewModel = hiltViewModel(),
 ) {
-    when (val state = viewModel.state) {
-        is NewsState.Loading -> {
-            Box(modifier = Modifier.fillMaxSize()) {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+    val articles = viewModel.articles.collectAsLazyPagingItems()
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(16.dp),
+        ) {
+            items(articles.itemCount) { index ->
+                articles[index]?.let { article ->
+                    NewsArticleItem(article = article, onClick = { })
+                }
+            }
+
+            when (articles.loadState.append) {
+                is LoadState.Loading -> {
+                    item {
+                        Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                            CircularProgressIndicator(modifier = Modifier.padding(16.dp))
+                        }
+                    }
+                }
+
+                else -> Unit
             }
         }
+        when (articles.loadState.refresh) {
+            is LoadState.Loading -> {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            }
 
-        is NewsState.Error -> {
-            Box(modifier = Modifier.fillMaxSize()) {
+            is LoadState.Error -> {
                 Column(
                     modifier = Modifier.align(Alignment.Center),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(text = state.message)
+                    Text(text = "Couldn't load news. Check your connection")
                     Spacer(modifier = Modifier.height(8.dp))
-                    Button(onClick = { viewModel.retry() }) {
+                    Button(onClick = { articles.retry() }) {
                         Text("Retry")
                     }
                 }
             }
-        }
 
-        is NewsState.Success -> {
-            LazyColumn(modifier = Modifier.fillMaxSize()) {
-                items(state.articles) { article ->
-                    Column(modifier = Modifier.padding(16.dp)) {
-                        Text(text = article.title, style = MaterialTheme.typography.titleMedium)
-                        Text(text = article.sourceName, style = MaterialTheme.typography.bodySmall)
- //                       Text(text = article.link, style = MaterialTheme.typography.displaySmall)
-//                        article.pubDate?.let { Text(text = it, style = MaterialTheme.typography.bodySmall) }
-//                        article.imageUrl?.let { Text(text = it, style = MaterialTheme.typography.bodySmall) }
-
-                        HorizontalDivider()
-                    }
-                }
-            }
+            else -> Unit
         }
     }
 }

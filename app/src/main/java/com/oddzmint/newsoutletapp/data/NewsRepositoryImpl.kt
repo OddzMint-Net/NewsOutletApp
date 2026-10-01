@@ -1,27 +1,21 @@
 package com.oddzmint.newsoutletapp.data
 
-import com.oddzmint.newsoutletapp.data.mapper.toArticle
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.oddzmint.newsoutletapp.data.remote.NewsApi
-import com.oddzmint.newsoutletapp.domain.model.NewsPage
+import com.oddzmint.newsoutletapp.data.remote.NewsPagingSource
+import com.oddzmint.newsoutletapp.domain.model.Article
 import com.oddzmint.newsoutletapp.domain.repository.NewsRepository
+import kotlinx.coroutines.flow.Flow
 
 class NewsRepositoryImpl(
     private val api: NewsApi
 ) : NewsRepository {
-    override suspend fun getLatestNews(page: String?): NewsPage {
-        val response = api.getLatestNews(
-            country = "za",
-            language = "en",
-            page = page
-        )
-
-        val articles = response.results
-            .filter { it.duplicate != true }
-            .map { it.toArticle() }
-
-        return NewsPage(
-            articles = articles,
-            nextPage = response.nextPage
-        )
+    override fun getLatestNews(): Flow<PagingData<Article>> {
+        return Pager(
+            config = PagingConfig(pageSize = 10, enablePlaceholders = false),
+            pagingSourceFactory = { NewsPagingSource(api, country = "za", language = "en") }
+        ).flow
     }
 }

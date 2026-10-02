@@ -1,0 +1,52 @@
+package com.oddzmint.newsoutletapp.presentation.common.navigation.navGraph
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.oddzmint.newsoutletapp.presentation.common.navigation.NewsBottonBar
+import com.oddzmint.newsoutletapp.presentation.common.navigation.NewsNavigationActions
+import com.oddzmint.newsoutletapp.presentation.common.navigation.NewsTopBar
+import com.oddzmint.newsoutletapp.presentation.news.BookmarkScreen
+import com.oddzmint.newsoutletapp.presentation.news.HomeScreen
+import com.oddzmint.newsoutletapp.presentation.news.SearchScreen
+
+@Composable
+fun NewsNavigatorScreen() {
+
+    val navController = rememberNavController()
+    val navigationActions = remember { NewsNavigationActions(navController) }
+    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
+
+
+    Scaffold(
+        topBar = {
+            if (currentRoute == BottomNavItem.Home.route.route) {
+                NewsTopBar(
+                    onBookmarkClick = { navigationActions.navigateTo(BottomNavItem.Bookmark.route.route) }
+                )
+            }
+        },
+        bottomBar = {
+            NewsBottonBar(
+                currentRoute = currentRoute,
+                onItemClick = { item -> navigationActions.navigateTo(item.route.route) }
+            )
+        }
+    ) { innerPadding ->
+        NavHost(
+            navController = navController,
+            startDestination = BottomNavItem.Home.route.route,
+            modifier = Modifier.padding(innerPadding)
+        ) {
+            composable(route = Route.HomeScreen.route) { HomeScreen() }
+            composable(route = Route.SearchScreen.route) { SearchScreen() }
+            composable(route = Route.BookmarkScreen.route) { BookmarkScreen() }
+        }
+    }
+}

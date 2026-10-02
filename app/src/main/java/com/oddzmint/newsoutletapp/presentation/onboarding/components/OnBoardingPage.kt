@@ -19,8 +19,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.oddzmint.newsoutletapp.R
-import com.oddzmint.newsoutletapp.presentation.onboarding.Page
-import com.oddzmint.newsoutletapp.presentation.onboarding.pages
 import com.oddzmint.newsoutletapp.ui.theme.NewsOutletAppTheme
 
 @Composable

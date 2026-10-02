@@ -11,7 +11,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.oddzmint.newsoutletapp.presentation.MainViewModel
-import com.oddzmint.newsoutletapp.presentation.navGraph.NavGraph
+import com.oddzmint.newsoutletapp.presentation.common.navigation.navGraph.NavGraph
 import com.oddzmint.newsoutletapp.ui.theme.NewsOutletAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 

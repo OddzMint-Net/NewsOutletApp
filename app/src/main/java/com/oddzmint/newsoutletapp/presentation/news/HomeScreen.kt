@@ -1,6 +1,13 @@
-package com.oddzmint.newsoutletapp.presentation.navGraph
+package com.oddzmint.newsoutletapp.presentation.news
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -13,25 +20,24 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.oddzmint.newsoutletapp.presentation.NewsViewModel
-import com.oddzmint.newsoutletapp.presentation.onboarding.components.NewsArticleItem
+import com.oddzmint.newsoutletapp.presentation.common.navigation.NewsArticleItem
 
 @Composable
-fun NewsNavigatorScreen(
-    viewModel: NewsViewModel = hiltViewModel(),
+fun HomeScreen(
+    viewModel: NewsViewModel = hiltViewModel()
 ) {
     val articles = viewModel.articles.collectAsLazyPagingItems()
 
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(16.dp),
+            contentPadding = PaddingValues(16.dp)
         ) {
             items(articles.itemCount) { index ->
                 articles[index]?.let { article ->
-                    NewsArticleItem(article = article, onClick = { })
+                    NewsArticleItem(article = article, onClick = {})
                 }
             }
-
             when (articles.loadState.append) {
                 is LoadState.Loading -> {
                     item {
@@ -44,6 +50,7 @@ fun NewsNavigatorScreen(
                 else -> Unit
             }
         }
+
         when (articles.loadState.refresh) {
             is LoadState.Loading -> {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
@@ -64,5 +71,6 @@ fun NewsNavigatorScreen(
 
             else -> Unit
         }
+
     }
 }

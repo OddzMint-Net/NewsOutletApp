@@ -1,4 +1,4 @@
-package com.oddzmint.newsoutletapp.presentation.navGraph
+package com.oddzmint.newsoutletapp.presentation.common.navigation.navGraph
 
 sealed class Route(
     val route: String

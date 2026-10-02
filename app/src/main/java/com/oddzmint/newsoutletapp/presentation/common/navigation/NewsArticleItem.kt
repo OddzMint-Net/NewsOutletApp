@@ -1,4 +1,4 @@
-package com.oddzmint.newsoutletapp.presentation.onboarding.components
+package com.oddzmint.newsoutletapp.presentation.common.navigation
 
 import androidx.compose.foundation.clickable
 
@@ -29,7 +29,7 @@ fun NewsArticleItem(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .clickable { onClick }
+            .clickable { onClick() }
     ) {
         Row(
             modifier = Modifier
@@ -54,32 +54,32 @@ fun NewsArticleItem(
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold,
                     maxLines = 3,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
                 )
-                Spacer(modifier = Modifier.height(6.dp))
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(6.dp),
-                ) {
-                    Text(
-                        text = article.sourceName,
-                        style = MaterialTheme.typography.labelSmall,
-                        fontWeight = FontWeight.Bold,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier.weight(1f, fill = false)
-                    )
-                    Text(
-                        text = "•",
-                        style = MaterialTheme.typography.labelSmall
-                    )
-                    Text(
-                        text = formatPubDate(article.pubDate),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        maxLines = 1
-                    )
-                }
+            }
+
+            Spacer(modifier = Modifier.height(6.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                Text(
+                    text = article.sourceName,
+                    style = MaterialTheme.typography.labelSmall,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.weight(1f, fill = false)
+                )
+
+                Text(
+                    text = formatPubDate(article.pubDate),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    maxLines = 1
+                )
             }
         }
-        HorizontalDivider()
     }
+    HorizontalDivider()
 }

@@ -1,4 +1,4 @@
-package com.oddzmint.newsoutletapp.presentation.common.navigation
+package com.oddzmint.newsoutletapp.presentation.common.components
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar

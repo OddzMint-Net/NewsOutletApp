@@ -1,4 +1,4 @@
-package com.oddzmint.newsoutletapp.presentation.news
+package com.oddzmint.newsoutletapp.presentation.common.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -8,38 +8,33 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
-import androidx.compose.runtime.getValue
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.oddzmint.newsoutletapp.domain.model.Article
-import com.oddzmint.newsoutletapp.presentation.SearchViewModel
-import com.oddzmint.newsoutletapp.presentation.common.navigation.NewsArticleItem
+import com.oddzmint.newsoutletapp.presentation.viewmodel.SearchViewModel
 
 @Composable
 fun SearchScreen(
     viewModel: SearchViewModel = hiltViewModel(),
-    onArticle: (Article) -> Unit
+    onArticleClick: (Article) -> Unit
 ) {
-
     val articles = viewModel.results.collectAsLazyPagingItems()
 
     Column(modifier = Modifier.fillMaxSize()) {
-        OutlinedTextField(
-            value = viewModel.query,
-            onValueChange = { viewModel.onQueryChange(newQuery = it) },
+        NewsSearchBar(
+            query = viewModel.query,
+            onQueryChange = { viewModel.onQueryChange(it) },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
-            placeholder = { Text("Search news...") },
-            singleLine = true
+                .padding(16.dp)
         )
 
         when {
@@ -52,6 +47,12 @@ fun SearchScreen(
             articles.loadState.refresh is LoadState.Loading -> {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     CircularProgressIndicator()
+                }
+            }
+
+            articles.loadState.refresh is LoadState.Error -> {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Text("Something went wrong. Try again")
                 }
             }
 
@@ -72,11 +73,12 @@ fun SearchScreen(
                                 .collectAsState(initial = false)
                             NewsArticleItem(
                                 article = article,
-                                onClick = {},
+                                onClick = { onArticleClick(article) },
                                 isBookmarked = isBookmarked,
                                 onBookmarkClick = { viewModel.toggleBookmark(article, isBookmarked) }
                             )
                         }
+
                     }
                 }
             }

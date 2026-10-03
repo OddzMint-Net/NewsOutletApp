@@ -1,4 +1,4 @@
-package com.oddzmint.newsoutletapp.presentation.onboarding.components
+package com.oddzmint.newsoutletapp.presentation.onboarding
 
 import androidx.annotation.DrawableRes
 import com.oddzmint.newsoutletapp.R

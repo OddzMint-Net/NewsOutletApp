@@ -91,4 +91,5 @@ dependencies {
     ksp("androidx.room:room-compiler:2.7.1")
     implementation("androidx.room:room-paging:2.7.1")
     implementation("androidx.compose.material:material-icons-extended:1.7.5")
+    implementation("androidx.browser:browser:1.8.0")
 }

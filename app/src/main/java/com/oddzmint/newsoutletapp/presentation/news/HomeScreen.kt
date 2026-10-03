@@ -21,12 +21,14 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.oddzmint.newsoutletapp.domain.model.Article
 import com.oddzmint.newsoutletapp.presentation.NewsViewModel
 import com.oddzmint.newsoutletapp.presentation.common.navigation.NewsArticleItem
 
 @Composable
 fun HomeScreen(
-    viewModel: NewsViewModel = hiltViewModel()
+    viewModel: NewsViewModel = hiltViewModel(),
+    onArticle: (Article) -> Unit
 ) {
     val articles = viewModel.articles.collectAsLazyPagingItems()
 
@@ -40,7 +42,7 @@ fun HomeScreen(
                     val isBookmarked by viewModel.isBookmarked(article.link).collectAsState(initial = false)
                     NewsArticleItem(
                         article = article,
-                        onClick = {},
+                        onClick = { onArticle(article) },
                         isBookmarked = isBookmarked,
                         onBookmarkClick = { viewModel.toggledBookmark(article, isBookmarked) }
                     )

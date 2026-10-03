@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NewsViewModel @Inject constructor(
-    private val getLatestNews: GetLatestNews,
+    getLatestNews: GetLatestNews,
     private val getBookmarkStatus: GetBookmarkStatus,
     private val toggledBookmark: ToggleBookmark
 ) : ViewModel() {

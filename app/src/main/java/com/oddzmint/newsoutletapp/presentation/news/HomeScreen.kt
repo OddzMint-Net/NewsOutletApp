@@ -13,6 +13,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -35,7 +37,13 @@ fun HomeScreen(
         ) {
             items(articles.itemCount) { index ->
                 articles[index]?.let { article ->
-                    NewsArticleItem(article = article, onClick = {})
+                    val isBookmarked by viewModel.isBookmarked(article.link).collectAsState(initial = false)
+                    NewsArticleItem(
+                        article = article,
+                        onClick = {},
+                        isBookmarked = isBookmarked,
+                        onBookmarkClick = { viewModel.toggledBookmark(article, isBookmarked) }
+                    )
                 }
             }
             when (articles.loadState.append) {

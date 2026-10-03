@@ -1,4 +1,4 @@
-package com.oddzmint.newsoutletapp.presentation
+package com.oddzmint.newsoutletapp.presentation.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

@@ -1,4 +1,4 @@
-package com.oddzmint.newsoutletapp.presentation.common.navigation
+package com.oddzmint.newsoutletapp.presentation.common.components
 
 import com.oddzmint.newsoutletapp.domain.model.Article
 import javax.inject.Inject

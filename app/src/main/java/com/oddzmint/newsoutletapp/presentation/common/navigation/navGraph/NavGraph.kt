@@ -7,9 +7,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
-import com.oddzmint.newsoutletapp.presentation.onboarding.components.OnBoardingViewModel
-import com.oddzmint.newsoutletapp.presentation.onboarding.components.OnBoardingEvent
-import com.oddzmint.newsoutletapp.presentation.onboarding.components.OnBoardingScreen
+import com.oddzmint.newsoutletapp.presentation.common.components.NewsNavigatorScreen
+import com.oddzmint.newsoutletapp.presentation.viewmodel.OnBoardingViewModel
+import com.oddzmint.newsoutletapp.presentation.onboarding.OnBoardingEvent
+import com.oddzmint.newsoutletapp.presentation.onboarding.OnBoardingScreen
 
 @Composable
 fun NavGraph(startDestination: String) {

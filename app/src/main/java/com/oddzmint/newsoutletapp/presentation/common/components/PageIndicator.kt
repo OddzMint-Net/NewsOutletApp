@@ -1,4 +1,4 @@
-package com.oddzmint.newsoutletapp.presentation
+package com.oddzmint.newsoutletapp.presentation.common.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -12,7 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Gray
-import com.oddzmint.newsoutletapp.presentation.onboarding.Dimens.IndicatorSize
+import androidx.compose.ui.tooling.preview.Preview
+import com.oddzmint.newsoutletapp.presentation.common.Dimens.IndicatorSize
 
 @Composable
 fun PageIndicator(
@@ -30,4 +31,13 @@ fun PageIndicator(
             )
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun pageIndicatorPreview() {
+    PageIndicator(
+        pageSize = 2,
+        selectedPage = 1
+    )
 }

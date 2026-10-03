@@ -1,4 +1,4 @@
-package com.oddzmint.newsoutletapp.presentation.common.navigation.navGraph
+package com.oddzmint.newsoutletapp.presentation.common.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Scaffold
@@ -10,14 +10,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.oddzmint.newsoutletapp.presentation.NewsNavigatorViewModel
-import com.oddzmint.newsoutletapp.presentation.common.navigation.NewsBottonBar
-import com.oddzmint.newsoutletapp.presentation.common.navigation.NewsNavigationActions
-import com.oddzmint.newsoutletapp.presentation.common.navigation.NewsTopBar
-import com.oddzmint.newsoutletapp.presentation.news.BookmarkScreen
-import com.oddzmint.newsoutletapp.presentation.news.DetailsScreen
-import com.oddzmint.newsoutletapp.presentation.news.HomeScreen
-import com.oddzmint.newsoutletapp.presentation.news.SearchScreen
+import com.oddzmint.newsoutletapp.presentation.viewmodel.NewsNavigatorViewModel
+import com.oddzmint.newsoutletapp.presentation.common.navigation.navGraph.BottomNavItem
+import com.oddzmint.newsoutletapp.presentation.common.navigation.navGraph.NewsNavigationActions
+import com.oddzmint.newsoutletapp.presentation.common.navigation.navGraph.Route
 
 @Composable
 fun NewsNavigatorScreen(
@@ -59,7 +55,7 @@ fun NewsNavigatorScreen(
             }
             composable(route = Route.SearchScreen.route) {
                 SearchScreen(
-                    onArticle = { article ->
+                    onArticleClick = { article ->
                         viewModel.selectedArticleHolder.article = article
                         navigationActions.navigateTo(Route.DetailsScreen.route)
                     }
@@ -67,7 +63,7 @@ fun NewsNavigatorScreen(
             }
             composable(route = Route.BookmarkScreen.route) {
                 BookmarkScreen(
-                    onArticle = { article ->
+                    onArticleClick = { article ->
                         viewModel.selectedArticleHolder.article = article
                         navigationActions.navigateTo(Route.DetailsScreen.route)
                     }

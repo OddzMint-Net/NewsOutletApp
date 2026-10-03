@@ -1,4 +1,4 @@
-package com.oddzmint.newsoutletapp.presentation.onboarding.components
+package com.oddzmint.newsoutletapp.presentation.onboarding
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image

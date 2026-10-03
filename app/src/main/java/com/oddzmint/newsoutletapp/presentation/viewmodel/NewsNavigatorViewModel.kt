@@ -1,7 +1,7 @@
-package com.oddzmint.newsoutletapp.presentation
+package com.oddzmint.newsoutletapp.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.oddzmint.newsoutletapp.presentation.common.navigation.SelectedArticleHolder
+import com.oddzmint.newsoutletapp.presentation.common.components.SelectedArticleHolder
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

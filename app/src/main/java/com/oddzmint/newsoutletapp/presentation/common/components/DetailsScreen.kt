@@ -1,8 +1,8 @@
-package com.oddzmint.newsoutletapp.presentation.news
+package com.oddzmint.newsoutletapp.presentation.common.components
 
 import androidx.compose.material.icons.outlined.BookmarkBorder
 import com.oddzmint.newsoutletapp.domain.util.formatPubDate
-import com.oddzmint.newsoutletapp.presentation.DetailsViewModel
+import com.oddzmint.newsoutletapp.presentation.viewmodel.DetailsViewModel
 import android.content.Intent
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.foundation.layout.*
@@ -16,20 +16,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil3.compose.AsyncImage
+import com.oddzmint.newsoutletapp.domain.model.Article
+import com.oddzmint.newsoutletapp.presentation.common.navigation.navGraph.Route
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailsScreen(
     viewModel: DetailsViewModel = hiltViewModel(),
     onBackClick: () -> Unit
 ) {
     val article = viewModel.article
-    val context = LocalContext.current
-
     if (article == null) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             Text("Article not found")
@@ -38,7 +39,24 @@ fun DetailsScreen(
     }
 
     val isBookmarked by viewModel.isBookmarked(article.link).collectAsState(initial = false)
+    DetailsScreenContent(
+        article = article,
+        isBookmarked = isBookmarked,
+        onBackClick = onBackClick,
+        onBookmarkClick = { viewModel.toggleBookmark(article, isBookmarked) }
+    )
+}
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun DetailsScreenContent(
+    article: Article,
+    isBookmarked: Boolean,
+    onBackClick: () -> Unit,
+    onBookmarkClick: () -> Unit
+) {
+
+    val context = LocalContext.current
     Scaffold(
         topBar = {
             TopAppBar(
@@ -50,7 +68,7 @@ fun DetailsScreen(
                 },
                 actions = {
                     IconButton(onClick = {
-                        viewModel.toggleBookmark(article, isBookmarked)
+                        onBookmarkClick()
                     }) {
                         Icon(
                             imageVector = if (isBookmarked) Icons.Filled.Bookmark else Icons.Outlined.BookmarkBorder,
@@ -81,7 +99,7 @@ fun DetailsScreen(
                 contentDescription = article.title,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(220.dp),
+                    .height(120.dp),
                 contentScale = ContentScale.Crop
             )
             Column(modifier = Modifier.padding(16.dp)) {
@@ -94,7 +112,7 @@ fun DetailsScreen(
                     Text(
                         text = article.sourceName,
                         style = MaterialTheme.typography.labelMedium,
-                        fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+                        fontWeight = FontWeight.Bold
                     )
                     Text(
                         text = formatPubDate(article.pubDate),
@@ -108,16 +126,33 @@ fun DetailsScreen(
                     style = MaterialTheme.typography.bodyLarge
                 )
                 Spacer(modifier = Modifier.height(24.dp))
-                Button(
+                NewsButton(
+                    text = "Read full article",
                     onClick = {
                         val customTabsIntent = CustomTabsIntent.Builder().build()
                         customTabsIntent.launchUrl(context, article.link.toUri())
                     },
                     modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("Read full article")
-                }
+                )
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun DetailsScreenContentPreview() {
+    DetailsScreenContent(
+        article = Article(
+            title = "OddzMint puts Starship megarocket in orbit for first time",
+            description = "Odwa Mtatambi's Starship megarocket reached orbit for the first time on Monday after blasting off from Johannesburg in a major milestone for OddzMint.",
+            link = "https://example.com",
+            imageUrl = null,
+            sourceName = "Times",
+            pubDate = "2030-09-28 14:26:03"
+        ),
+        isBookmarked = false,
+        onBackClick = {},
+        onBookmarkClick = {}
+    )
 }

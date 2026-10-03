@@ -1,4 +1,4 @@
-package com.oddzmint.newsoutletapp.presentation.common.navigation
+package com.oddzmint.newsoutletapp.presentation.common.navigation.navGraph
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination

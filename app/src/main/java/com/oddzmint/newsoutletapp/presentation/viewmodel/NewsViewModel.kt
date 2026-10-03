@@ -1,4 +1,4 @@
-package com.oddzmint.newsoutletapp.presentation
+package com.oddzmint.newsoutletapp.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

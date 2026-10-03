@@ -1,4 +1,4 @@
-package com.oddzmint.newsoutletapp.presentation.common.navigation
+package com.oddzmint.newsoutletapp.presentation.common.components
 
 import androidx.compose.foundation.clickable
 
@@ -7,7 +7,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.outlined.BookmarkBorder
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -19,6 +18,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.oddzmint.newsoutletapp.R
@@ -104,4 +104,23 @@ fun NewsArticleItem(
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun NewsArticleItemPreview() {
+    NewsArticleItem(
+        article = Article(
+            title = "SpaceX puts Starship megarocket in orbit for first time",
+            description = "Elon Musk's Starship megarocket reached orbit for the first time on Monday.",
+            link = "https://example.com",
+            imageUrl = null,
+            sourceName = "The Citizen",
+            pubDate = "2026-09-28 14:26:03"
+
+        ),
+        onClick = {},
+        isBookmarked = false,
+        onBookmarkClick = {}
+    )
 }

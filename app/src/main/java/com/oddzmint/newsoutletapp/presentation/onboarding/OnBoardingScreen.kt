@@ -1,4 +1,4 @@
-package com.oddzmint.newsoutletapp.presentation.onboarding.components
+package com.oddzmint.newsoutletapp.presentation.onboarding
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
@@ -19,11 +19,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.oddzmint.newsoutletapp.presentation.PageIndicator
-import com.oddzmint.newsoutletapp.presentation.common.NewsButton
-import com.oddzmint.newsoutletapp.presentation.common.NewsTextButton
-import com.oddzmint.newsoutletapp.presentation.onboarding.Dimens.MediumPadding2
-import com.oddzmint.newsoutletapp.presentation.onboarding.Dimens.PageIndicatorWidth
+import com.oddzmint.newsoutletapp.presentation.common.components.PageIndicator
+import com.oddzmint.newsoutletapp.presentation.common.components.NewsButton
+import com.oddzmint.newsoutletapp.presentation.common.components.NewsTextButton
+import com.oddzmint.newsoutletapp.presentation.common.Dimens.MediumPadding2
+import com.oddzmint.newsoutletapp.presentation.common.Dimens.PageIndicatorWidth
 import com.oddzmint.newsoutletapp.ui.theme.NewsOutletAppTheme
 import kotlinx.coroutines.launch
 

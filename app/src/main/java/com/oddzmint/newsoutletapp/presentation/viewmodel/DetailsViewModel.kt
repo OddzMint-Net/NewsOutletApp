@@ -1,11 +1,11 @@
-package com.oddzmint.newsoutletapp.presentation
+package com.oddzmint.newsoutletapp.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.oddzmint.newsoutletapp.domain.model.Article
 import com.oddzmint.newsoutletapp.domain.useCase.GetBookmarkStatus
 import com.oddzmint.newsoutletapp.domain.useCase.ToggleBookmark
-import com.oddzmint.newsoutletapp.presentation.common.navigation.SelectedArticleHolder
+import com.oddzmint.newsoutletapp.presentation.common.components.SelectedArticleHolder
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch

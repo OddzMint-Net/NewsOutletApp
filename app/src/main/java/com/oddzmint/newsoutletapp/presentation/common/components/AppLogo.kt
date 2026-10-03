@@ -1,4 +1,4 @@
-package com.oddzmint.newsoutletapp.presentation.common
+package com.oddzmint.newsoutletapp.presentation.common.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
@@ -22,7 +22,7 @@ fun AppLogo(
         painter = painterResource(id = R.drawable.splash),
         contentDescription = "NewsOutletApp",
         contentScale = ContentScale.Crop,
-        modifier = Modifier
+        modifier = modifier
             .size(size)
             .clip(RectangleShape)
             .scale(1.6f)

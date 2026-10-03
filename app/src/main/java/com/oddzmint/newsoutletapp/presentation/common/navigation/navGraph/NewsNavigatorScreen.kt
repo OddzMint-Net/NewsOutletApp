@@ -5,19 +5,24 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.oddzmint.newsoutletapp.presentation.NewsNavigatorViewModel
 import com.oddzmint.newsoutletapp.presentation.common.navigation.NewsBottonBar
 import com.oddzmint.newsoutletapp.presentation.common.navigation.NewsNavigationActions
 import com.oddzmint.newsoutletapp.presentation.common.navigation.NewsTopBar
 import com.oddzmint.newsoutletapp.presentation.news.BookmarkScreen
+import com.oddzmint.newsoutletapp.presentation.news.DetailsScreen
 import com.oddzmint.newsoutletapp.presentation.news.HomeScreen
 import com.oddzmint.newsoutletapp.presentation.news.SearchScreen
 
 @Composable
-fun NewsNavigatorScreen() {
+fun NewsNavigatorScreen(
+    viewModel: NewsNavigatorViewModel = hiltViewModel()
+) {
 
     val navController = rememberNavController()
     val navigationActions = remember { NewsNavigationActions(navController) }
@@ -44,9 +49,34 @@ fun NewsNavigatorScreen() {
             startDestination = BottomNavItem.Home.route.route,
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable(route = Route.HomeScreen.route) { HomeScreen() }
-            composable(route = Route.SearchScreen.route) { SearchScreen() }
-            composable(route = Route.BookmarkScreen.route) { BookmarkScreen() }
+            composable(route = Route.HomeScreen.route) {
+                HomeScreen(
+                    onArticle = { article ->
+                        viewModel.selectedArticleHolder.article = article
+                        navigationActions.navigateTo(Route.DetailsScreen.route)
+                    }
+                )
+            }
+            composable(route = Route.SearchScreen.route) {
+                SearchScreen(
+                    onArticle = { article ->
+                        viewModel.selectedArticleHolder.article = article
+                        navigationActions.navigateTo(Route.DetailsScreen.route)
+                    }
+                )
+            }
+            composable(route = Route.BookmarkScreen.route) {
+                BookmarkScreen(
+                    onArticle = { article ->
+                        viewModel.selectedArticleHolder.article = article
+                        navigationActions.navigateTo(Route.DetailsScreen.route)
+                    }
+                )
+            }
+
+            composable(route = Route.DetailsScreen.route) {
+                DetailsScreen(onBackClick = { navController.popBackStack() })
+            }
         }
     }
 }

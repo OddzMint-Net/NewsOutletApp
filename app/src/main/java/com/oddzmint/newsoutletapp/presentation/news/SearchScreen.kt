@@ -19,12 +19,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.compose.runtime.getValue
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.oddzmint.newsoutletapp.domain.model.Article
 import com.oddzmint.newsoutletapp.presentation.SearchViewModel
 import com.oddzmint.newsoutletapp.presentation.common.navigation.NewsArticleItem
 
 @Composable
 fun SearchScreen(
-    viewModel: SearchViewModel = hiltViewModel()
+    viewModel: SearchViewModel = hiltViewModel(),
+    onArticle: (Article) -> Unit
 ) {
 
     val articles = viewModel.results.collectAsLazyPagingItems()

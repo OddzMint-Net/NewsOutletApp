@@ -13,12 +13,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.oddzmint.newsoutletapp.domain.model.Article
 import com.oddzmint.newsoutletapp.presentation.BookmarkViewModel
 import com.oddzmint.newsoutletapp.presentation.common.navigation.NewsArticleItem
 
 @Composable
 fun BookmarkScreen(
-    viewModel: BookmarkViewModel = hiltViewModel()
+    viewModel: BookmarkViewModel = hiltViewModel(),
+    onArticle: (Article) -> Unit
 ) {
 
     val bookmarks by viewModel.bookmarks.collectAsState()

@@ -111,8 +111,8 @@ fun NewsArticleItem(
 private fun NewsArticleItemPreview() {
     NewsArticleItem(
         article = Article(
-            title = "SpaceX puts Starship megarocket in orbit for first time",
-            description = "Elon Musk's Starship megarocket reached orbit for the first time on Monday.",
+            title = "OddzMint puts Starship mega rocket in orbit for first time",
+            description = "Odwa Mtatambi's Starship mega rocket reached orbit for the first time on Monday.",
             link = "https://example.com",
             imageUrl = null,
             sourceName = "The Citizen",

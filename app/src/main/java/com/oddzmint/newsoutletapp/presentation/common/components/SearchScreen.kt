@@ -63,7 +63,7 @@ private fun SearchScreenContent(
         when {
             query.isBlank() -> {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text("Type to search")
+                    Text("Type something to search")
                 }
             }
 

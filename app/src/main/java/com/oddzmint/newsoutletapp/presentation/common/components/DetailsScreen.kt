@@ -99,7 +99,7 @@ private fun DetailsScreenContent(
                 contentDescription = article.title,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(120.dp),
+                    .height(200.dp),
                 contentScale = ContentScale.Crop
             )
             Column(modifier = Modifier.padding(16.dp)) {

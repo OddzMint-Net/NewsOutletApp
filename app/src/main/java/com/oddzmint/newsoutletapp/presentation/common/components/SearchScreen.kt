@@ -14,12 +14,17 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
+import androidx.paging.PagingData
+import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.oddzmint.newsoutletapp.domain.model.Article
 import com.oddzmint.newsoutletapp.presentation.viewmodel.SearchViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun SearchScreen(
@@ -27,20 +32,38 @@ fun SearchScreen(
     onArticleClick: (Article) -> Unit
 ) {
     val articles = viewModel.results.collectAsLazyPagingItems()
+    SearchScreenContent(
+        query = viewModel.query,
+        onQueryChange = { viewModel.onQueryChange(it) },
+        articles = articles,
+        isBookmarked = { link -> viewModel.isBookmarked(link) },
+        onToggleBookmark = { article, bookmarked -> viewModel.toggleBookmark(article, bookmarked) },
+        onArticleClick = onArticleClick
+    )
+}
 
+@Composable
+private fun SearchScreenContent(
+    query: String,
+    onQueryChange: (String) -> Unit,
+    articles: LazyPagingItems<Article>,
+    isBookmarked: (String) -> Flow<Boolean>,
+    onToggleBookmark: (Article, Boolean) -> Unit,
+    onArticleClick: (Article) -> Unit
+) {
     Column(modifier = Modifier.fillMaxSize()) {
         NewsSearchBar(
-            query = viewModel.query,
-            onQueryChange = { viewModel.onQueryChange(it) },
+            query = query,
+            onQueryChange = { onQueryChange(it) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
         )
 
         when {
-            viewModel.query.isBlank() -> {
+            query.isBlank() -> {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text("Start typing to search")
+                    Text("Type to search")
                 }
             }
 
@@ -58,7 +81,7 @@ fun SearchScreen(
 
             articles.itemCount == 0 -> {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text("No result for \"${viewModel.query}\"")
+                    Text("No result for \"${query}\"")
                 }
             }
 
@@ -69,19 +92,59 @@ fun SearchScreen(
                 ) {
                     items(articles.itemCount) { index ->
                         articles[index]?.let { article ->
-                            val isBookmarked by viewModel.isBookmarked(article.link)
+                            val isBookmarked by isBookmarked(article.link)
                                 .collectAsState(initial = false)
                             NewsArticleItem(
                                 article = article,
                                 onClick = { onArticleClick(article) },
                                 isBookmarked = isBookmarked,
-                                onBookmarkClick = { viewModel.toggleBookmark(article, isBookmarked) }
+                                onBookmarkClick = { onToggleBookmark(article, isBookmarked) }
                             )
                         }
-
                     }
                 }
             }
         }
     }
+}
+
+@Preview(showBackground = true, name = "Empty query")
+@Composable
+private fun SearchScreenEmptyQueryPreview() {
+    SearchScreenContent(
+        query = "",
+        onQueryChange = {},
+        articles = flowOf(PagingData.empty<Article>()).collectAsLazyPagingItems(),
+        isBookmarked = { flowOf(false) },
+        onToggleBookmark = { _, _ -> },
+        onArticleClick = {}
+    )
+}
+
+@Preview(showBackground = true, name = "with results")
+@Composable
+private fun SearchScreenWithResultsPreview() {
+    val fakeArticles = flowOf(
+        PagingData.from(
+            listOf(
+                Article(
+                    title = "Interests in Tech",
+                    description = "What practical steps can you take to absorb the higher repayments",
+                    link = "https://example.com",
+                    imageUrl = null,
+                    sourceName = "OddzMint",
+                    pubDate = "2026-10-05 15:22"
+                )
+            )
+        )
+    ).collectAsLazyPagingItems()
+
+    SearchScreenContent(
+        query = "Interest in Tech",
+        onQueryChange = {},
+        articles = fakeArticles,
+        isBookmarked = { flowOf(false) },
+        onToggleBookmark = { _, _ -> },
+        onArticleClick = {}
+    )
 }

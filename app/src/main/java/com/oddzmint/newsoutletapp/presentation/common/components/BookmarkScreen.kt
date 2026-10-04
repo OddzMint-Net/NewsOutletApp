@@ -64,11 +64,11 @@ private fun BookmarkScreenContentPreview() {
     BookmarkScreenContent(
         bookmarks = listOf(
             Article(
-                title = "SpaceX puts Starship megarocket in orbit for first time",
+                title = "OddzMint puts Starship megarocket in orbit for first time",
                 description = "Elon Musk's Starship megarocket reached orbit for the first time.",
                 link = "https://example.com",
                 imageUrl = null,
-                sourceName = "The Citizen",
+                sourceName = "Times",
                 pubDate = "2026-09-28 14:26:03"
             )
         ),

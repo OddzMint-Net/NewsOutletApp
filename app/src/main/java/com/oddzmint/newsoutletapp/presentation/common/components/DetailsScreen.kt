@@ -1,8 +1,5 @@
 package com.oddzmint.newsoutletapp.presentation.common.components
 
-import androidx.compose.material.icons.outlined.BookmarkBorder
-import com.oddzmint.newsoutletapp.domain.util.formatPubDate
-import com.oddzmint.newsoutletapp.presentation.viewmodel.DetailsViewModel
 import android.content.Intent
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.foundation.layout.*
@@ -10,6 +7,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.outlined.BookmarkBorder
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -23,7 +21,8 @@ import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil3.compose.AsyncImage
 import com.oddzmint.newsoutletapp.domain.model.Article
-import com.oddzmint.newsoutletapp.presentation.common.navigation.navGraph.Route
+import com.oddzmint.newsoutletapp.domain.util.formatPubDate
+import com.oddzmint.newsoutletapp.presentation.viewmodel.DetailsViewModel
 
 @Composable
 fun DetailsScreen(
@@ -132,7 +131,6 @@ private fun DetailsScreenContent(
                         val customTabsIntent = CustomTabsIntent.Builder().build()
                         customTabsIntent.launchUrl(context, article.link.toUri())
                     },
-                    modifier = Modifier.fillMaxWidth()
                 )
             }
         }

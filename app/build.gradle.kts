@@ -92,4 +92,9 @@ dependencies {
     implementation("androidx.room:room-paging:2.7.1")
     implementation("androidx.compose.material:material-icons-extended:1.7.5")
     implementation("androidx.browser:browser:1.8.0")
+
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
+    testImplementation("io.mockk:mockk:1.13.13")
+    testImplementation("app.cash.turbine:turbine:1.1.0")
+    testImplementation("com.google.truth:truth:1.4.4")
 }

@@ -6,7 +6,6 @@ import com.oddzmint.newsoutletapp.domain.useCase.ReadAppEntry
 import com.oddzmint.newsoutletapp.domain.useCase.SaveAppEntry
 import com.oddzmint.newsoutletapp.presentation.common.navigation.navGraph.Route
 import com.oddzmint.newsoutletapp.presentation.viewmodel.MainViewModel
-import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers

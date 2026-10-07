@@ -6,7 +6,6 @@ import coil3.network.HttpException
 import com.oddzmint.newsoutletapp.data.mapper.toArticle
 import com.oddzmint.newsoutletapp.domain.model.Article
 import okio.IOException
-import org.intellij.lang.annotations.Language
 
 class NewsSearchPagingSource(
     private val api: NewsApi,

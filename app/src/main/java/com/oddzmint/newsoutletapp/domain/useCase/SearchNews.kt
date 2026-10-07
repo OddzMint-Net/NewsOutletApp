@@ -1,7 +1,6 @@
 package com.oddzmint.newsoutletapp.domain.useCase
 
 import androidx.paging.PagingData
-import androidx.room.Query
 import com.oddzmint.newsoutletapp.domain.model.Article
 import com.oddzmint.newsoutletapp.domain.repository.NewsRepository
 import kotlinx.coroutines.flow.Flow

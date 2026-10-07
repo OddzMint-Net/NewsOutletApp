@@ -108,7 +108,7 @@ private fun SearchScreenContent(
     }
 }
 
-@Preview(showBackground = true, name = "Empty query")
+@Preview(showBackground = true , name = "Empty query")
 @Composable
 private fun SearchScreenEmptyQueryPreview() {
     SearchScreenContent(
@@ -121,7 +121,7 @@ private fun SearchScreenEmptyQueryPreview() {
     )
 }
 
-@Preview(showBackground = true, name = "with results")
+@Preview(showBackground = true , name = "with results")
 @Composable
 private fun SearchScreenWithResultsPreview() {
     val fakeArticles = flowOf(

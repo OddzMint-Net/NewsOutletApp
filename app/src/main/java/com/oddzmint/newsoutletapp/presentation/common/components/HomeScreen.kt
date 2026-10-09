@@ -84,11 +84,11 @@ private fun HomeScreenContent(
         if (showErrorDialog) {
             AlertDialog(
                 onDismissRequest = { if (articles.itemCount > 0) showErrorDialog = false },
-                title = { Text("Couldn't load news") },
+                title = { Text(stringResource(R.string.could_not_load_news)) },
                 text = { Text(stringResource(R.string.check_your_connection)) },
                 confirmButton = {
                     NewsTextButton(
-                        text = "Retry",
+                        text = stringResource(R.string.retry),
                         onClick = {
                             showErrorDialog = false
                             articles.retry()

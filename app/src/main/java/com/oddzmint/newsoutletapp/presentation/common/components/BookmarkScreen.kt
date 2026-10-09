@@ -11,9 +11,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.oddzmint.newsoutletapp.R
 import com.oddzmint.newsoutletapp.domain.model.Article
 import com.oddzmint.newsoutletapp.presentation.viewmodel.BookmarkViewModel
 
@@ -39,7 +41,7 @@ private fun BookmarkScreenContent(
 ) {
     if (bookmarks.isEmpty()) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            Text("No bookmarks yet")
+            Text(stringResource(R.string.no_bookmarks_yet))
         }
     } else {
         LazyColumn(

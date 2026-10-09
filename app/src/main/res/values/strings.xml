@@ -15,4 +15,5 @@
     <string name="type_something_to_search">Type something to search</string>
     <string name="something_went_wrong_try_again">Something went wrong. Try again</string>
     <string name="could_not_load_news">Couldn\'t load news</string>
+    <string name="no_bookmarks_yet">No bookmarks yet</string>
 </resources>

@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -15,6 +16,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.oddzmint.newsoutletapp.R
 import com.oddzmint.newsoutletapp.domain.model.Article
 import com.oddzmint.newsoutletapp.presentation.viewmodel.NewsViewModel
 import kotlinx.coroutines.flow.Flow
@@ -83,7 +85,7 @@ private fun HomeScreenContent(
             AlertDialog(
                 onDismissRequest = { if (articles.itemCount > 0) showErrorDialog = false },
                 title = { Text("Couldn't load news") },
-                text = { Text("Check your connection") },
+                text = { Text(stringResource(R.string.check_your_connection)) },
                 confirmButton = {
                     NewsTextButton(
                         text = "Retry",
@@ -95,10 +97,10 @@ private fun HomeScreenContent(
                 },
                 dismissButton = {
                     if (articles.itemCount > 0) {
-                        NewsTextButton(text = "Cancel", onClick = { showErrorDialog = false })
+                        NewsTextButton(text = stringResource(R.string.cancel), onClick = { showErrorDialog = false })
                     }
                     NewsTextButton(
-                        text = "Cancel",
+                        text = stringResource(R.string.cancel),
                         onClick = { showErrorDialog = false }
                     )
                 }

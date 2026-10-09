@@ -14,12 +14,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil3.compose.AsyncImage
+import com.oddzmint.newsoutletapp.R
 import com.oddzmint.newsoutletapp.domain.model.Article
 import com.oddzmint.newsoutletapp.domain.util.formatPubDate
 import com.oddzmint.newsoutletapp.presentation.viewmodel.DetailsViewModel
@@ -32,7 +34,7 @@ fun DetailsScreen(
     val article = viewModel.article
     if (article == null) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            Text("Article not found")
+            Text(stringResource(R.string.article_not_found))
         }
         return
     }
@@ -62,7 +64,7 @@ private fun DetailsScreenContent(
                 title = {},
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.Filled.ArrowBack, contentDescription = stringResource(R.string.back_button))
                     }
                 },
                 actions = {
@@ -71,7 +73,9 @@ private fun DetailsScreenContent(
                     }) {
                         Icon(
                             imageVector = if (isBookmarked) Icons.Filled.Bookmark else Icons.Outlined.BookmarkBorder,
-                            contentDescription = if (isBookmarked) "Remove bookmark" else "Add bookmark"
+                            contentDescription = if (isBookmarked) stringResource(R.string.remove_bookmark) else stringResource(
+                                R.string.add_bookmark
+                            )
                         )
                     }
                     IconButton(onClick = {
@@ -81,7 +85,7 @@ private fun DetailsScreenContent(
                         }
                         context.startActivity(Intent.createChooser(sendIntent, null))
                     }) {
-                        Icon(Icons.Filled.Share, contentDescription = "Share")
+                        Icon(Icons.Filled.Share, contentDescription = stringResource(R.string.share))
                     }
                 }
             )
@@ -126,7 +130,7 @@ private fun DetailsScreenContent(
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 NewsButton(
-                    text = "Read full article",
+                    text = stringResource(R.string.read_full_article),
                     onClick = {
                         val customTabsIntent = CustomTabsIntent.Builder().build()
                         customTabsIntent.launchUrl(context, article.link.toUri())

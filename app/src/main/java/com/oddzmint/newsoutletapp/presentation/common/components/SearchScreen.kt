@@ -14,6 +14,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -21,6 +22,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.oddzmint.newsoutletapp.R
 import com.oddzmint.newsoutletapp.domain.model.Article
 import com.oddzmint.newsoutletapp.presentation.viewmodel.SearchViewModel
 import kotlinx.coroutines.flow.Flow
@@ -63,7 +65,7 @@ private fun SearchScreenContent(
         when {
             query.isBlank() -> {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text("Type something to search")
+                    Text(stringResource(R.string.type_something_to_search))
                 }
             }
 
@@ -75,7 +77,7 @@ private fun SearchScreenContent(
 
             articles.loadState.refresh is LoadState.Error -> {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text("Something went wrong. Try again")
+                    Text(stringResource(R.string.something_went_wrong_try_again))
                 }
             }
 
@@ -108,7 +110,7 @@ private fun SearchScreenContent(
     }
 }
 
-@Preview(showBackground = true , name = "Empty query")
+@Preview(showBackground = true, name = "Empty query")
 @Composable
 private fun SearchScreenEmptyQueryPreview() {
     SearchScreenContent(
@@ -121,7 +123,7 @@ private fun SearchScreenEmptyQueryPreview() {
     )
 }
 
-@Preview(showBackground = true , name = "with results")
+@Preview(showBackground = true, name = "with results")
 @Composable
 private fun SearchScreenWithResultsPreview() {
     val fakeArticles = flowOf(

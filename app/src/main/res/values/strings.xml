@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">NewsOutletApp</string>
     <string name="back_button">Back</string>
+    <string name="cancel">Cancel</string>
     <string name="next_button">Next</string>
+    <string name="article_not_found">Article not found</string>
+    <string name="remove_bookmark">Remove bookmark</string>
+    <string name="add_bookmark">Add bookmark</string>
+    <string name="share">Share</string>
+    <string name="menu">Menu</string>
+    <string name="read_full_article">Read full article</string>
+    <string name="check_your_connection">Check your connection</string>
+    <string name="clear_search">Clear search</string>
+    <string name="type_something_to_search">Type something to search</string>
+    <string name="something_went_wrong_try_again">Something went wrong. Try again</string>
 </resources>

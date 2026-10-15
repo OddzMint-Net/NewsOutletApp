@@ -3,14 +3,6 @@ package com.oddzmint.newsoutletapp.data.remote.dto
 import com.google.gson.annotations.SerializedName
 
 data class ArticleDto(
-    @SerializedName("ai_org")
-    val aiOrg: String?,
-    @SerializedName("ai_region")
-    val aiRegion: String?,
-    @SerializedName("ai_summary")
-    val aiSummary: String?,
-    @SerializedName("ai_tag")
-    val aiTag: String?,
     @SerializedName("article_id")
     val articleId: String,
     val category: List<String?>,
@@ -30,8 +22,6 @@ data class ArticleDto(
     val pubDate: String?,
     val pubDateTZ: String?,
     val sentiment: String?,
-    @SerializedName("sentiment_stats")
-    val sentimentStats: String?,
     @SerializedName("source_icon")
     val sourceIcon: String?,
     @SerializedName("source_id")

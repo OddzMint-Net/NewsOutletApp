@@ -1,6 +1,7 @@
 package com.oddzmint.newsoutletapp.presentation.common.components
 
 import android.content.res.Configuration
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -55,7 +56,7 @@ private fun NewsButtonPreview() {
     }
 }
 
-@Preview(showBackground = true, name = "NewsButton Preview Dark Mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(showBackground = true, name = "NewsButton Preview Dark Mode", uiMode = UI_MODE_NIGHT_YES)
 @Composable
 private fun NewsButtonDarkPreview() {
     NewsOutletAppTheme {

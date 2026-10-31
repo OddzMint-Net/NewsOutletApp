@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="108dp"
+        android:height="108dp"
+        android:viewportWidth="108"
+        android:viewportHeight="108">
+
+    <!-- Newspaper body -->
+    <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M34,32h40a4,4 0 0 1 4,4v32a4,4 0 0 1 -4,4h-40a4,4 0 0 1 -4,-4v-32a4,4 0 0 1 4,-4z"/>
+
+    <!-- Image placeholder -->
+    <path
+            android:fillColor="#2563EB"
+            android:pathData="M35,38h16v15h-16z"/>
+
+    <!-- Headline lines (right of image) -->
+    <path
+            android:fillColor="#1E3A8A"
+            android:pathData="M55,38h18v4h-18z"/>
+    <path
+            android:fillColor="#94A3B8"
+            android:pathData="M55,45h18v3h-18z"/>
+    <path
+            android:fillColor="#94A3B8"
+            android:pathData="M55,50.5h12v3h-12z"/>
+
+    <!-- Body text lines -->
+    <path
+            android:fillColor="#94A3B8"
+            android:pathData="M35,58h38v3h-38z"/>
+    <path
+            android:fillColor="#94A3B8"
+            android:pathData="M35,64h38v3h-38z"/>
+</vector>
